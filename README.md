@@ -1,7 +1,7 @@
 # Are Kitties Real!?
 ### Requirements 
  - Linux Server ( For Production environment )
- - PostgreSQL Server
+ - PostgreSQL Serverx
  - Redis Server
  - NGINX
  - Cloudflare Account
