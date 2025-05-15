@@ -1,0 +1,38 @@
+
+{% extends '__layout__.html' %}
+{% block title %}OTP Verification{% endblock %}
+{% block head %}
+<style>
+.auth-container{height:100vh;display:flex;align-items:center;justify-content:center;background:rgba(15,15,15,.5);backdrop-filter:blur(10px)}
+.auth-box{background:rgba(23,23,23,.7);border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.2);padding:25px;width:100%;max-width:400px;border:1px solid rgba(255,255,255,.05)}
+.auth-box h1{font-weight:700;margin-bottom:5px;color:#fff}
+.auth-box p{color:#aaa;margin-bottom:20px}
+.auth-box input{background:rgba(30,30,30,.6);border:1px solid rgba(255,255,255,.1);color:#fff;padding:12px 15px;border-radius:6px;margin-bottom:12px;backdrop-filter:blur(5px);transition:all .2s;width:100%;text-align:center;letter-spacing:4px;font-size:1.2rem}
+.auth-box input:focus{border-color:rgba(255,255,255,.3);box-shadow:0 0 0 2px rgba(255,255,255,.1)}
+.auth-box button{width:100%;padding:12px;border-radius:6px;background:linear-gradient(45deg,#6b46c1,#9f7aea);border:none;color:#fff;font-weight:600;margin-top:5px;transition:all .3s}
+.auth-box button:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(107,70,193,.3)}
+.alert{border-radius:6px;padding:10px;margin-bottom:15px;text-align:center}
+.alert-danger{background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);color:#ef4444}
+</style>
+{% endblock %}
+{% block content %}
+<div class="auth-container">
+  <div class="auth-box">
+    <h1>VORTEXI</h1>
+    <p>experience 2016+ with <b>freedom</b></p>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <p>Please enter the OTP code from your authenticator app</p>
+    <form method="POST">
+      <input type="text" placeholder="123456" name="totpCode" required>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+      <button type="submit">Verify</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

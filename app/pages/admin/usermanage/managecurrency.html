@@ -1,0 +1,94 @@
+{% extends '__layout__.html' %}
+{% block title %}Manage User{% endblock %}
+
+{% block head %}
+<link href="/static/css/admin.css" rel="stylesheet"/>
+<style>
+    .show-on-hover {
+        filter: blur(4px);
+        transition: 0.2s;
+    }
+    .show-on-hover:hover {
+        filter: blur(0px);
+        transition: 0.2s;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="main">
+    <div class="container" style="max-width: 800px;">
+        <a class="mb-2 d-block" href="/admin/manage-users/{{userObj.id}}">← Return to User Page</a>
+        <div class="d-flex align-items-center mb-3">
+            <img height="100px" style="aspect-ratio: 1/1;" class="rounded-2" src="/Thumbs/Avatar.ashx?userId={{userObj.id}}&x=100&y=100">
+            <div class="ms-3">
+                <h1 class="m-0 text-secondary">Manage Robux & Builders Club for <span class="text-white">{{userObj.username}}</span></h1>
+                <p class="text-secondary m-0" style="font-size: 12px;">UserId: <span class="text-white">{{userObj.id}}</span></p>
+            </div>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div>
+            {% for message in messages %}
+                <div class="alert border border-danger p-2 text-center messagealerts">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <div class="linebreak"></div>
+
+        <div class="robux-management">
+            <h3>Robux & Tix Management</h3>
+            <form method="POST" id="robux-form">
+                <div class="form-floating">
+                    <select class="form-control" id="action-select" required>
+                        <option value="add">Add</option>
+                        <option value="subtract">Subtract</option>
+                    </select>
+                    <label for="action-select">Action</label>
+                </div>
+
+                <div class="form-floating mt-2">
+                    <select class="form-control" name="currency_type" id="currency-type-select" required>
+                        <option value="robux">Robux</option>
+                        <option value="tix">Tix</option>
+                    </select>
+                    <label for="currency-type-select">Currency</label>
+                </div>
+
+                <div class="form-floating mt-2">
+                    <input type="number" class="form-control" name="amount" id="amount-input" placeholder="Amount" required>
+                    <label for="amount-input">Amount</label>
+                </div>
+                
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="linebreak"></div>
+                <button type="submit" class="btn btn-primary mt-2 w-100 btn-sm">Submit Currency Change</button>
+            </form>
+        </div>
+
+        <div class="linebreak"></div>
+
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+    const actionSelect = document.getElementById("action-select");
+    const amountInput = document.getElementById("amount-input");
+    const robuxForm = document.getElementById("robux-form");
+
+    robuxForm.addEventListener("submit", function(event) {
+        if (actionSelect.value === "subtract") {
+            amountInput.value = -Math.abs(amountInput.value);
+        } else {
+            amountInput.value = Math.abs(amountInput.value);
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %}

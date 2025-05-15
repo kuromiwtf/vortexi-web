@@ -1,0 +1,83 @@
+{% extends '__layout__.html' %}
+{% block title %}Signup{% endblock %}
+{% block head %}
+<style>
+.auth-container{height:100vh;display:flex;align-items:center;justify-content:center;background:rgba(15,15,15,.5);backdrop-filter:blur(10px)}
+.auth-box{background:rgba(23,23,23,.7);border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.2);padding:25px;width:100%;max-width:420px;border:1px solid rgba(255,255,255,.05)}
+.auth-box h1{font-weight:700;margin-bottom:5px;color:#fff}
+.auth-box p{color:#aaa;margin-bottom:20px}
+.auth-box input{background:rgba(30,30,30,.6);border:1px solid rgba(255,255,255,.1);color:#fff;padding:12px 15px;border-radius:6px;margin-bottom:12px;backdrop-filter:blur(5px);transition:all .2s; width: 100%; display: block;}
+.auth-box input:focus{border-color:rgba(255,255,255,.3);box-shadow:0 0 0 2px rgba(255,255,255,.1)}
+.auth-box button{width:100%;padding:12px;border-radius:6px;background:linear-gradient(45deg,#6b46c1,#9f7aea);border:none;color:#fff;font-weight:600;margin-top:5px;transition:all .3s}
+.auth-box button:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(107,70,193,.3)}
+.auth-box button:disabled{opacity:.6;cursor:not-allowed}
+.auth-box .links{text-align:center;margin-top:15px;color:#aaa}
+.auth-box .links a{color:#9f7aea;text-decoration:none;transition:color .2s}
+.auth-box .links a:hover{color:#b794f4;text-decoration:underline}
+.auth-image{display:none}
+@media(min-width:992px){
+  .auth-container{padding:0 30px}
+  .auth-box{margin-right:20px}
+  .auth-image{display:block;max-width:45%;border-radius:8px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+  .auth-image img{width:100%;height:100%;object-fit:cover}
+}
+.alert{border-radius:6px;padding:10px;margin-bottom:15px;text-align:center}
+.alert-danger{background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);color:#ef4444}
+#checkboxTerms{display:flex;align-items:flex-start;margin-bottom:15px}
+#checkboxTerms input{margin:5px 10px 0 0;width:16px;height:16px}
+#checkboxTerms p{margin:0;font-size:0.9rem}
+.cf-turnstile{margin:0 auto 15px;display:table}
+</style>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<div class="auth-container">
+  <div class="auth-box">
+    <center><h1>VORTEXI</h1>
+    <p>experience 2016+ with <b>freedom</b></p></center>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div>
+    {% for message in messages %}
+        <div class="alert border border-danger p-2 text-center messagealerts">
+            {{ message }}
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <form action="/signup" method="post">
+      <input type="text" id="username" name="username" placeholder="Username" required>
+      <input type="password" name="password" id="password" placeholder="Password" required>
+      <div id="checkboxTerms">
+        <input name="agreetoTermsandPrivacy" type="checkbox" id="agreeCheckbox" required>
+        <label for="agreeCheckbox">
+          <p>I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a></p>
+        </label>
+      </div>
+      <div class="cf-turnstile" data-theme="dark" data-sitekey="{{turnstilekey}}"></div>
+      {% if SignupEnabled: %}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>{%endif%}
+      <button type="submit" {% if not SignupEnabled: %}disabled{% endif %}>Signup</button>
+    </form>
+    <div class="links">
+      <p>Already have an account? <a href="/login">Login</a> • <a href="https://discord.gg/Bv7kYbnMYR">Discord</a></p>
+    </div>
+  </div>
+  <div class="auth-image">
+    <img src="/static/img/LoginImage2.png" alt="Signup Image">
+  </div>
+</div>
+<script>
+  // sometimes, you should stop skidding.
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+      if (link.href.includes('/static/css/header.css?v4')) {
+        link.remove()
+      }
+    });
+  });
+  const messageElement = document.getElementById('websitewidemessage')
+  if (messageElement) {
+    messageElement.remove();
+  }
+  </script>
+  
+{% endblock %}

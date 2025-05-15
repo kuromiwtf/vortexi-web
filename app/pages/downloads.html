@@ -1,0 +1,48 @@
+{% extends '__layout__.html' %}
+{% block title %}Downloads{% endblock %}
+{% block head %}
+<style>
+    .text-secondary {
+        color: rgb(199, 199, 199) !important;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container" style="margin-top:128px;min-height: 100vh;max-width: 1000px;">
+    <div class="d-flex mb-2 align-items-center">
+        <h1>Downloads</h1>
+        <div class="ms-auto">
+            <a class="btn btn-outline-light fw-bold" href="https://github.com/PrintedScript/syntax-bootstrapper" target="_blank"><i class="bi bi-github"></i> Github Repo</a>
+        </div>
+    </div>
+    <div class="p-3 border d-flex rounded">
+        <div>
+            <h4 class="mb-0"><i class="bi bi-windows"></i> Windows Client Bootstrapper</h4>
+            <p class="m-0 text-secondary" style="font-size: 14px;">MD5: <span class="text-white">790df486f2721208e06bd05dbb9d95f8</span></p>
+            <div class="d-flex mt-1">
+                <a href="https://www.virustotal.com/gui/file/386cdfecd4f4c80cedcd9a9176b6938eddf4883545f11826ead6bfce0339d667" target="_blank" class="text-decoration-none m-0" style="font-size: 11px;">Bootstrapper VirusTotal</a>
+                <p class="text-secondary m-0 ms-1" style="font-size: 11px;">
+                    | Windows 10 or newer required
+                </p>
+            </div>
+        </div>
+        <div class="ms-auto">
+            <a href="https://setup.vortexi.cc/VortexiPlayerLauncher.exe" target="_blank" class="text-decoration-none m-0 btn btn-outline-primary btn fw-bold"><i class="bi bi-download me-2"></i>Download</a>
+        </div>
+    </div>
+    <div class="p-3 border d-flex mt-3 rounded">
+        <div>
+            <h4 class="mb-0 text-white"><i class="bi bi-hammer"></i></i> Studio (2016)</h4>
+            <p class="m-0 text-secondary" style="font-size: 14px;">MD5: <span class="text-white">3d01030e5bb37f7ab0b6ad05c3e7e5ca</span></p>
+            <div class="d-flex mt-1">
+                <p class="text-secondary m-0" style="font-size: 11px;">
+                    Note: You currently can not publish / update your games through the studio.
+                </p>
+            </div>
+        </div>
+        <div class="ms-auto">
+            <a href="https://setup.vortexi.cc/Studio16.zip" target="_blank" class="text-decoration-none m-0 btn btn-outline-primary btn fw-bold"><i class="bi bi-download me-2"></i>Download</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
