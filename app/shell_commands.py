@@ -4,6 +4,7 @@ from app.models.user import User
 from app.util import auth
 from sqlalchemy import func
 import logging
+# henlo from china!
 def lookup_user_id():
     """Lookup user by Id"""
     try:
