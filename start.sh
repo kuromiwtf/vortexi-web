@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP_CMD="gunicorn -b 0.0.0.0:3003 --preload --workers=8 --threads=20 'app:create_app()'"
+APP_CMD="gunicorn -b 0.0.0.0:3003 --preload --workers=8 --threads=20 app:create_app()"
 GUNICORN_PID=""
 
 start_app() {
