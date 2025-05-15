@@ -1,6 +1,5 @@
 # Are Kitties Real!?
-Yes they are :D xaxa
-Yeezy porn
+Indeed they are.
 ### Requirements 
  - Linux Server ( For Production environment )
  - PostgreSQL Serverx
