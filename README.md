@@ -1,7 +1,4 @@
-# Syntax Backend
-**Last Updated: 20/2/2024**
-
-## What you need
+# Are Kitties Real!?
 ### Requirements 
  - Linux Server ( For Production environment )
  - PostgreSQL Server
