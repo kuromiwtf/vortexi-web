@@ -1,0 +1,28 @@
+[
+  {
+    "id": "autopull",
+    "execute-command": "/root/syntaxsource/syntaxwebsite/deploy.sh",
+    "command-working-directory": "/root/syntaxsource/syntaxwebsite",
+    "response-message": "Pulling and restarting app...",
+    "trigger-rule": {
+      "and": [
+        {
+          "match": {
+            "type": "value",
+            "value": "refs/heads/main",
+            "parameter": {
+              "source": "payload",
+              "name": "ref"
+            }
+          }
+        },
+        {
+          "match": {
+            "type": "payload-hash-sha256",
+            "secret": "ThisIsMyAmericanDreamCuh1337"
+          }
+        }
+      ]
+    }
+  }
+]
